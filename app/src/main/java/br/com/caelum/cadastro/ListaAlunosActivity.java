@@ -1,8 +1,11 @@
 package br.com.caelum.cadastro;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -25,8 +28,13 @@ import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
+    private int REQUEST_LIGAR = 1;
     private List<Aluno> listAlunos;
-    ListView listView;
+    private ListView listView;
+    private Aluno alunoSelecionado;
+
+
+
 
 
 
@@ -115,7 +123,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) info;
 
-        final Aluno aluno = (Aluno) getListAlunos().get(menuInfo.position);
+        alunoSelecionado = (Aluno) getListAlunos().get(menuInfo.position);
 
         MenuItem menuItemDelete = menu.add("Excluir");
         MenuItem menuItemUpdate = menu.add("Editar");
@@ -129,7 +137,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 AlunoDAO alunoDAO = new AlunoDAO(ListaAlunosActivity.this);
-                alunoDAO.delete(aluno);
+                alunoDAO.delete(alunoSelecionado);
                 alunoDAO.close();
                 updateListAluno();
                 return false;
@@ -142,7 +150,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
 
-                intent.putExtra("aluno",aluno);
+                intent.putExtra("aluno",alunoSelecionado);
 
                 startActivity(intent);
 
@@ -151,26 +159,74 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
 
-        Intent intentCall = new Intent(Intent.ACTION_CALL);
-        intentCall.setData(Uri.parse("tel:"+aluno.getTelefone()));
-        menuItemCall.setIntent(intentCall);
+//        Intent intentCall = new Intent(Intent.ACTION_CALL);
+//        intentCall.setData(Uri.parse("tel:"+aluno.getTelefone()));
+//        menuItemCall.setIntent(intentCall);
 
 
         Intent intentSms = new Intent(Intent.ACTION_VIEW);
-        intentSms.setData(Uri.parse("sms:"+aluno.getTelefone()));
+        intentSms.setData(Uri.parse("sms:"+alunoSelecionado.getTelefone()));
         intentSms.putExtra("sms_body","Hello Word");
         menuItemSms.setIntent(intentSms);
 
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
-        intentSite.setData(Uri.parse("http://:"+aluno.getSite()));
+        intentSite.setData(Uri.parse("http://:"+alunoSelecionado.getSite()));
         menuItemSite.setIntent(intentSite);
 
         Intent intentMap = new Intent(Intent.ACTION_VIEW);
-        intentMap.setData(Uri.parse("geo:0,0z=14&q="+ Uri.encode(aluno.getEndereco())));
+        intentMap.setData(Uri.parse("geo:0,0z=14&q="+ Uri.encode(alunoSelecionado.getEndereco())));
         menuItemMap.setIntent(intentMap);
+
+
+        menuItemCall.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                setAlunoSelecionado(alunoSelecionado);
+                verificaPermissao(android.Manifest.permission.CALL_PHONE);
+                return false;
+            }
+        });
 
     }
 
+    private void verificaPermissao(String permission){
+
+        if(ActivityCompat.checkSelfPermission(this,permission) == PackageManager.PERMISSION_GRANTED)
+            doExecuteCall();
+        else
+            ActivityCompat.requestPermissions(this, new String[]{permission}, REQUEST_LIGAR);
+
+        }
+
+
+    @Override
+    public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == REQUEST_LIGAR){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                doExecuteCall();
+            }else{
+                Toast.makeText(ListaAlunosActivity.this, "PERDEU MANO!!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void doExecuteCall() {
+        Intent intentCall = new Intent(Intent.ACTION_CALL);
+        intentCall.setData(Uri.parse("tel:"+getAlunoSelecionado().getTelefone()));
+        startActivity(intentCall);
+
+    }
+
+
+    public Aluno getAlunoSelecionado() {
+        if(alunoSelecionado == null)
+            alunoSelecionado = new Aluno();
+        return alunoSelecionado;
+    }
+
+    public void setAlunoSelecionado(Aluno alunoSelecionado) {
+        this.alunoSelecionado = alunoSelecionado;
+    }
 
     public List<Aluno> getListAlunos() {
         if(listAlunos == null)
