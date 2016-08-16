@@ -2,15 +2,14 @@ package br.com.caelum.cadastro;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import java.io.File;
 
@@ -30,7 +29,7 @@ public class FormularioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-        getFormularioHelper();
+
 
         Intent intent = getIntent();
 
@@ -40,14 +39,15 @@ public class FormularioActivity extends AppCompatActivity {
             getFormularioHelper().doPopularAluno(aluno);
 
 
-        Button btnFoto = getFormularioHelper().getBtnFoto();
+        Button btnFoto =  getFormularioHelper().getBtnFoto();
+
         btnFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                filePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
                 Uri localFoto = Uri.fromFile(new File(filePath));
-                filePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpeg";
                 Intent inTCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                final Intent intent1 = inTCamera.putExtra(MediaStore.EXTRA_OUTPUT, localFoto);
+                inTCamera.putExtra(MediaStore.EXTRA_OUTPUT, localFoto);
 
                 startActivityForResult(inTCamera,REQUEST_FOTO);
             }
@@ -70,8 +70,9 @@ public class FormularioActivity extends AppCompatActivity {
     if(requestCode == REQUEST_FOTO)
         if(resultCode == RESULT_OK)
             getFormularioHelper().loadImagem(filePath);
-        else
+        else {
             filePath = null;
+        }
     }
 
 

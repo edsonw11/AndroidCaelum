@@ -5,12 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.service.voice.AlwaysOnHotwordDetector;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import br.com.caelum.cadastro.bean.Aluno;
 

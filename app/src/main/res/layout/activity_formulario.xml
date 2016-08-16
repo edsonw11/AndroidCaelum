@@ -21,32 +21,33 @@
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="235dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context=".ListaAlunosActivity">
+            tools:context=".FormularioActivity">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/formulario_foto"
-                android:src="/@drawable/person"
-                android:background="#00A8E" />
+                android:src="@drawable/person"
+                android:background="#00A8EC" />
 
             <Button
                 android:id="@+id/botao_foto"
-                android:background="/@drawable/botao_foto"
+                android:background="@drawable/botao_foto"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottomw="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:elevation="6dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                />
 
         </RelativeLayout>>
 
@@ -88,30 +89,30 @@
         android:numStars="5"
         android:layout_gravity="center_horizontal"/>
 
-    <Button
-        android:id="@+id/btnSalvar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/btnSalvar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Salvar"-->
+        <!--/>-->
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:elevation="6dp"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp"/>
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="+"-->
+            <!--android:elevation="6dp"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:textSize="40sp"/>-->
 
 
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:max="10"
-            />
+        <!--<SeekBar-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:max="10"-->
+            <!--/>-->
 
 
 

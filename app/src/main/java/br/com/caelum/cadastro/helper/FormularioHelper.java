@@ -2,8 +2,6 @@ package br.com.caelum.cadastro.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.media.Rating;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +17,7 @@ import br.com.caelum.cadastro.bean.Aluno;
 public class FormularioHelper {
 
     private ImageView imgFoto;
-    private Button btnFoto;
+    private Button    btnFoto;
     private EditText edtNome;
     private EditText edtTelefone;
     private EditText edtEndereco;
@@ -133,6 +131,11 @@ public class FormularioHelper {
 
     public void loadImagem(String filePath) {
         Bitmap bmImg = BitmapFactory.decodeFile(filePath);
-        Bitmap bmImgReduzido = Bitmap.createScaledBitmap(bmImg,400)
+        Bitmap bmImgReduzido = Bitmap.createScaledBitmap(bmImg,400,bmImg.getWidth(),true);
+
+        getImgFoto().setImageBitmap(bmImgReduzido);
+        getImgFoto().setScaleType(ImageView.ScaleType.FIT_XY);
+        getImgFoto().setTag(filePath);
+
     }
 }

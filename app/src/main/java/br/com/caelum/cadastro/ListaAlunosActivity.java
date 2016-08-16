@@ -1,6 +1,5 @@
 package br.com.caelum.cadastro;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,13 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import br.com.caelum.cadastro.bean.Aluno;
 import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
@@ -90,13 +86,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Toast.makeText(ListaAlunosActivity.this, " Botao clicado", Toast.LENGTH_SHORT).show();
 
 
-                if (btnInsert.getText().toString().equals("+")) {
-                    btnInsert.setText("-");
-                    btnInsert.setBackgroundResource(R.drawable.fundo_azul);
-                } else {
-                    btnInsert.setText("+");
-                    btnInsert.setBackgroundResource(R.drawable.fundo);
-                }
+//                if (btnInsert.getText().toString().equals("+")) {
+//                    btnInsert.setText("-");
+//                    btnInsert.setBackgroundResource(R.drawable.fundo_azul);
+//                } else {
+//                    btnInsert.setText("+");
+//                    btnInsert.setBackgroundResource(R.drawable.fundo);
+//                }
 
 
                 Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
