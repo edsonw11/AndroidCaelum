@@ -1,13 +1,18 @@
 package br.com.caelum.cadastro;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import br.com.caelum.cadastro.bean.Aluno;
 import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
@@ -17,6 +22,9 @@ public class FormularioActivity extends AppCompatActivity {
 
     private FormularioHelper formularioHelper;
     private ListaAlunosActivity mainActivityListaAlunos;
+    private String filePath;
+    private int REQUEST_FOTO = 101;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,20 @@ public class FormularioActivity extends AppCompatActivity {
             getFormularioHelper().doPopularAluno(aluno);
 
 
+        Button btnFoto = getFormularioHelper().getBtnFoto();
+        btnFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri localFoto = Uri.fromFile(new File(filePath));
+                filePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpeg";
+                Intent inTCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                final Intent intent1 = inTCamera.putExtra(MediaStore.EXTRA_OUTPUT, localFoto);
+
+                startActivityForResult(inTCamera,REQUEST_FOTO);
+            }
+        });
+
+
 
 //        Button btnSalvar = (Button) findViewById(R.id.btnSalvar);
 //
@@ -42,6 +64,16 @@ public class FormularioActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    if(requestCode == REQUEST_FOTO)
+        if(resultCode == RESULT_OK)
+            getFormularioHelper().loadImagem(filePath);
+        else
+            filePath = null;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

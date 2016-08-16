@@ -1,7 +1,12 @@
 package br.com.caelum.cadastro.helper;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.Rating;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import br.com.caelum.cadastro.FormularioActivity;
@@ -13,6 +18,8 @@ import br.com.caelum.cadastro.bean.Aluno;
  */
 public class FormularioHelper {
 
+    private ImageView imgFoto;
+    private Button btnFoto;
     private EditText edtNome;
     private EditText edtTelefone;
     private EditText edtEndereco;
@@ -28,6 +35,8 @@ public class FormularioHelper {
         edtEndereco = (EditText) formularioActivity.findViewById(R.id.endereco);
         edtSite     = (EditText) formularioActivity.findViewById(R.id.site);
         ratingNota  = (RatingBar)formularioActivity.findViewById(R.id.nota);
+        imgFoto     = (ImageView) formularioActivity.findViewById(R.id.formulario_foto);
+        btnFoto     = (Button) formularioActivity.findViewById(R.id.botao_foto);
 
 
     }
@@ -103,5 +112,27 @@ public class FormularioHelper {
 
     public void setRatingNota(RatingBar ratingNota) {
         this.ratingNota = ratingNota;
+    }
+
+
+    public ImageView getImgFoto() {
+        return imgFoto;
+    }
+
+    public void setImgFoto(ImageView imgFoto) {
+        this.imgFoto = imgFoto;
+    }
+
+    public Button getBtnFoto() {
+        return btnFoto;
+    }
+
+    public void setBtnFoto(Button btnFoto) {
+        this.btnFoto = btnFoto;
+    }
+
+    public void loadImagem(String filePath) {
+        Bitmap bmImg = BitmapFactory.decodeFile(filePath);
+        Bitmap bmImgReduzido = Bitmap.createScaledBitmap(bmImg,400)
     }
 }
