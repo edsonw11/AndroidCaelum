@@ -37,9 +37,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
         getListAlunos().clear();
         getListAlunos().addAll(alunoDAO.list());
 
+
         ListaAlunosCustom adapter = new ListaAlunosCustom(this,getListAlunos());
 
-//        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, R.layout.listaalunocustom, getListAlunos());
+
+
+       // ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, R.layout.listaalunocustom, getListAlunos());
 
         listView.setAdapter(adapter);
 

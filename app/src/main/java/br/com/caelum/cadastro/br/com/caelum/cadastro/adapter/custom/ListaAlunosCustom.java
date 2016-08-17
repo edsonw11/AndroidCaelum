@@ -26,7 +26,10 @@ public class ListaAlunosCustom extends BaseAdapter {
     public ListaAlunosCustom(Activity activity, List<Aluno> listaAluno) {
         this.activity = activity;
         this.listaAluno = listaAluno;
+
+
     }
+
 
     @Override
     public int getCount() {
@@ -49,14 +52,14 @@ public class ListaAlunosCustom extends BaseAdapter {
         View viewXML = activity.getLayoutInflater().inflate(R.layout.listaalunocustom,parent,false);
 
         TextView textView = (TextView) viewXML.findViewById(R.id.txtListaNome);
-        textView.setText(listaAluno.get(posicao).getNome());
+        textView.setText(listaAluno.get(posicao).getNome().toString());
 
         ImageView imageView = (ImageView) viewXML.findViewById(R.id.imgFotoLista);
         Bitmap bitmap = null;
 
         if(listaAluno.get(posicao).getCaminhoFoto() == null){
-            bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.ic_no_image)
-            .createScaledBitmap(bitmap,100,100,true);;
+            bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.ic_no_image);
+
         }else{
             bitmap = BitmapFactory.decodeFile(listaAluno.get(posicao).getCaminhoFoto())
                      .createScaledBitmap(bitmap,100,100,true);
