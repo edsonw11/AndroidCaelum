@@ -52,7 +52,8 @@ public class ListaAlunosCustom extends BaseAdapter {
         View viewXML = activity.getLayoutInflater().inflate(R.layout.listaalunocustom,parent,false);
 
         TextView textView = (TextView) viewXML.findViewById(R.id.txtListaNome);
-        textView.setText(listaAluno.get(posicao).getNome().toString());
+        //textView.setText(listaAluno.get(posicao).getNome().toString());
+        textView.setText("foca");
 
         ImageView imageView = (ImageView) viewXML.findViewById(R.id.imgFotoLista);
         Bitmap bitmap = null;
