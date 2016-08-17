@@ -116,4 +116,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
         getWritableDatabase().update(tabelaAluno,contentValues,"ID=?",new String[]{aluno.getId().toString()});
 
     }
+
+    public boolean isAluno(String phone){
+        return true;
+    }
 }

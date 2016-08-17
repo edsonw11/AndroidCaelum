@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.caelum.cadastro.bean.Aluno;
+import br.com.caelum.cadastro.br.com.caelum.cadastro.adapter.custom.ListaAlunosCustom;
 import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -30,17 +31,15 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private Aluno alunoSelecionado;
 
 
-
-
-
-
     public void updateListAluno(){
 
         AlunoDAO alunoDAO = new AlunoDAO(this);
         getListAlunos().clear();
         getListAlunos().addAll(alunoDAO.list());
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, getListAlunos());
+        ListaAlunosCustom adapter = new ListaAlunosCustom(this,getListAlunos());
+
+//        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, R.layout.listaalunocustom, getListAlunos());
 
         listView.setAdapter(adapter);
 
