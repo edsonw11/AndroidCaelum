@@ -47,6 +47,7 @@ public class FormularioHelper {
         getAluno().setSite(edtSite.getText().toString());
         getAluno().setNota(ratingNota.getProgress());
 
+
         return getAluno();
 
     }

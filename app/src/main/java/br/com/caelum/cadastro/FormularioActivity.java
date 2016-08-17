@@ -86,10 +86,11 @@ public class FormularioActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
+        android.util.Log.i("passando","onOptionsItemSelected filePAth: " + filePath);
         if(item.getItemId() == R.id.menu_salvar){
 
             Aluno aluno = getFormularioHelper().buidl();
+            aluno.setCaminhoFoto(filePath);
             AlunoDAO alunoDAO = new AlunoDAO(this);
 
 

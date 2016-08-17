@@ -52,8 +52,7 @@ public class ListaAlunosCustom extends BaseAdapter {
         View viewXML = activity.getLayoutInflater().inflate(R.layout.listaalunocustom,parent,false);
 
         TextView textView = (TextView) viewXML.findViewById(R.id.txtListaNome);
-        //textView.setText(listaAluno.get(posicao).getNome().toString());
-        textView.setText("foca");
+        textView.setText(listaAluno.get(posicao).getNome().toString());
 
         ImageView imageView = (ImageView) viewXML.findViewById(R.id.imgFotoLista);
         Bitmap bitmap = null;
@@ -62,12 +61,13 @@ public class ListaAlunosCustom extends BaseAdapter {
             bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.ic_no_image);
 
         }else{
-            bitmap = BitmapFactory.decodeFile(listaAluno.get(posicao).getCaminhoFoto())
-                     .createScaledBitmap(bitmap,100,100,true);
+            bitmap = BitmapFactory.decodeFile(listaAluno.get(posicao).getCaminhoFoto());
+
+            bitmap.createScaledBitmap(bitmap,100,100,true);
         }
 
         imageView.setImageBitmap(bitmap);
 
-        return imageView;
+        return viewXML;
     }
 }

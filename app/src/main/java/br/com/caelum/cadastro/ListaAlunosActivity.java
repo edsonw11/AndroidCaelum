@@ -33,10 +33,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     public void updateListAluno(){
 
+        android.util.Log.i("passando","updateListAluno");
+
         AlunoDAO alunoDAO = new AlunoDAO(this);
         getListAlunos().clear();
+        android.util.Log.i("passando","updateListAluno XX ");
         getListAlunos().addAll(alunoDAO.list());
-
+        android.util.Log.i("passando","updateListAluno XXx ");
 
         ListaAlunosCustom adapter = new ListaAlunosCustom(this,getListAlunos());
 
@@ -117,7 +120,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){
         //super.onCreateContextMenu(menu,view,info);
-        Log.d("AQUI","TESTE");
+
 
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) info;
 
