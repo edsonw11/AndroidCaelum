@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,9 @@ import java.util.List;
 import br.com.caelum.cadastro.bean.Aluno;
 import br.com.caelum.cadastro.br.com.caelum.cadastro.adapter.custom.ListaAlunosCustom;
 import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
+import br.com.caelum.cadastro.converter.AlunoConverter;
+import br.com.caelum.cadastro.thread.EnviarNotasAlunosTask;
+import br.com.caelum.cadastro.webclient.Webclient;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -116,6 +120,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menufirstscreeam, menu);
+
+        return true;
+    }
 
 
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){
@@ -188,6 +199,24 @@ public class ListaAlunosActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if(item.getItemId() == R.id.menu_enviar_notas){
+
+            String json = new AlunoConverter().toJSON(getListAlunos());
+
+
+            Log.i("json",json);
+            new EnviarNotasAlunosTask(this, json).execute();
+
+
+
+        }
+        return true;
     }
 
     private void verificaPermissao(String permission){
