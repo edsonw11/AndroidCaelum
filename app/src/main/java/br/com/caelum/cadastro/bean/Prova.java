@@ -54,8 +54,6 @@ public class Prova implements Serializable {
 
     @Override
     public String toString() {
-        return "Prova{" +
-                "materia='" + materia + '\'' +
-                '}';
+        return materia;
     }
 }

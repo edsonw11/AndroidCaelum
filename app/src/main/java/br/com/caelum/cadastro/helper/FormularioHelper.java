@@ -41,6 +41,7 @@ public class FormularioHelper {
 
     public Aluno buidl(){
 
+        getAluno().setCaminhoFoto((String)imgFoto.getTag());
         getAluno().setNome(edtNome.getText().toString());
         getAluno().setTelefone(edtTelefone.getText().toString());
         getAluno().setEndereco(edtEndereco.getText().toString());

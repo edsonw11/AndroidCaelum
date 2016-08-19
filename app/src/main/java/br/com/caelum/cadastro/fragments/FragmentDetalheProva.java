@@ -1,0 +1,30 @@
+package br.com.caelum.cadastro.fragments;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import br.com.caelum.cadastro.R;
+
+public class FragmentDetalheProva extends Fragment {
+
+
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View layoutDetalhe = inflater.inflate(R.layout.fragment_detalhe_prova, container, false);
+
+        return layoutDetalhe;
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
+}

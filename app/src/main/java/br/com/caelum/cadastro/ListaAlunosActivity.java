@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,7 +24,6 @@ import br.com.caelum.cadastro.br.com.caelum.cadastro.adapter.custom.ListaAlunosC
 import br.com.caelum.cadastro.br.com.caelum.dao.AlunoDAO;
 import br.com.caelum.cadastro.converter.AlunoConverter;
 import br.com.caelum.cadastro.thread.EnviarNotasAlunosTask;
-import br.com.caelum.cadastro.webclient.Webclient;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -135,7 +133,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) info;
 
-        alunoSelecionado = (Aluno) getListAlunos().get(menuInfo.position);
+        alunoSelecionado = getListAlunos().get(menuInfo.position);
 
         MenuItem menuItemDelete = menu.add("Excluir");
         MenuItem menuItemUpdate = menu.add("Editar");
@@ -208,15 +206,16 @@ public class ListaAlunosActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.menu_enviar_notas){
 
             String json = new AlunoConverter().toJSON(getListAlunos());
-
-
             Log.i("json",json);
             new EnviarNotasAlunosTask(this, json).execute();
 
+        }else if (item.getItemId() == R.id.menu_receber_provas){
 
-
+            Intent provas = new Intent(this, ProvasActivity.class);
+            startActivity(provas);
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void verificaPermissao(String permission){

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,26 +52,28 @@ public class ListaProvaFragment extends Fragment {
 
       this.listViewProvas = (ListView) layoutListaProvas.findViewById(R.id.lista_prova_listview);
 
-      this.listViewProvas.setAdapter(new ArrayAdapter<Prova>(getActivity(),android.R.layout.simple_list_item_1,criarProvas()));
+      this.listViewProvas.setAdapter(new ArrayAdapter<Prova>(getActivity(),android.R.layout.simple_list_item_1, getListaDeProvas()));
 
       this.listViewProvas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
-          public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-              Prova S
+          public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+              Prova provaSelecionada = (Prova) adapterView.getItemAtPosition(posicao);
+              Toast.makeText(getActivity(), "Prova Selecionada " + provaSelecionada, Toast.LENGTH_SHORT).show();
+
           }
       });
 
       return  layoutListaProvas;
     }
 
-    private List<Prova> criarProvas() {
+    private List<Prova> getListaDeProvas() {
         Prova p1 = new Prova("20/06/2015", "Matematica");
         p1.setTopicos(Arrays.asList("Algebra linear","Calculo","Estatistica"));
 
         Prova p2 = new Prova("25/07/2015", "Portugues");
         p2.setTopicos(Arrays.asList("Complemento Nominal","Oracao Subordinadas","Analise Sintatica"));
 
-        List<Prova> provas = new Arrays.asList(p1, p2);
+        List<Prova> provas = Arrays.asList(p1, p2);
 
         return provas;
 

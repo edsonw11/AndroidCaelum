@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
 import java.io.File;
 
 import br.com.caelum.cadastro.bean.Aluno;
@@ -92,8 +91,6 @@ public class FormularioActivity extends AppCompatActivity {
             Aluno aluno = getFormularioHelper().buidl();
             aluno.setCaminhoFoto(filePath);
             AlunoDAO alunoDAO = new AlunoDAO(this);
-
-
 
             if(aluno.getId() == null)
                 alunoDAO.insert(aluno);

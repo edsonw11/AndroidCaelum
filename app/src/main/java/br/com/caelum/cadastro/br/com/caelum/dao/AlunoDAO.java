@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import br.com.caelum.cadastro.bean.Aluno;
 
@@ -54,6 +53,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     private ContentValues buildAlunoContentValues(Aluno aluno) {
         android.util.Log.i("passando" , "buildAlunoContentValues");
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("ID",aluno.getId());
         contentValues.put("NOME",aluno.getNome());
@@ -118,22 +118,24 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
 
-    public void delete(Aluno aluno) {
-
-        getWritableDatabase().delete(tabelaAluno,"ID= ?", new String[]{aluno.getId().toString()});
-
-
-    }
 
 
 
     public void update(Aluno aluno) {
+        android.util.Log.i("passando" , "update " + aluno.getCaminhoFoto());
 
         ContentValues contentValues = buildAlunoContentValues(aluno);
 
         getWritableDatabase().update(tabelaAluno,contentValues,"ID=?",new String[]{aluno.getId().toString()});
 
     }
+
+    public void delete(Aluno aluno) {
+        android.util.Log.i("passando" , "delete " + aluno.getCaminhoFoto());
+
+        getWritableDatabase().delete(tabelaAluno,"ID= ?", new String[]{aluno.getId().toString()});
+    }
+
 
     public boolean isAluno(String phone){
         android.util.Log.i("passando" , "isAluno " + phone);
