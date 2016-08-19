@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.caelum.cadastro.ProvasActivity;
 import br.com.caelum.cadastro.R;
 import br.com.caelum.cadastro.bean.Prova;
 
@@ -57,8 +57,13 @@ public class ListaProvaFragment extends Fragment {
       this.listViewProvas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+
               Prova provaSelecionada = (Prova) adapterView.getItemAtPosition(posicao);
-              Toast.makeText(getActivity(), "Prova Selecionada " + provaSelecionada, Toast.LENGTH_SHORT).show();
+
+              ProvasActivity calendarioProva = (ProvasActivity)getActivity();
+              calendarioProva.selecionaProva(provaSelecionada);
+
+              //Toast.makeText(getActivity(), "Prova Selecionada " + provaSelecionada, Toast.LENGTH_SHORT).show();
 
           }
       });
